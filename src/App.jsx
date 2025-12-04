@@ -1,35 +1,26 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Sidebar from "./components/sidebar";
+import InfoPage from "./components/pages/InfoPage";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center gap-6 p-4">
-      {/* Tiêu đề Tailwind */}
-      <h1 className="text-4xl font-bold text-primary">
-        🚀 Tailwind + shadcn/ui Test
-      </h1>
+    <Router>
+      <div style={{ display: "flex" }}>
+        <Sidebar />
 
-      {/* Nút shadcn */}
-      <Button className="bg-primary text-white hover:bg-primary/90">
-        Nút Primary
-      </Button>
-
-      <Button className="bg-secondary text-white hover:bg-secondary/90">
-        Nút Secondary
-      </Button>
-
-      {/* Card shadcn */}
-      <Card className="w-80">
-        <CardHeader>
-          <CardTitle className="text-primary">Thẻ kiểm tra</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-600">
-            Màu primary là xanh lá #009DA5 và màu secondary là xanh dương
-            #0D6CE8
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+        <main style={{ flex: 1, padding: "2rem" }}>
+          <Routes>
+            <Route path="/" element={<InfoPage section="overview" />} />
+            <Route path="/forces" element={<InfoPage section="forces" />} />
+            <Route
+              path="/principles"
+              element={<InfoPage section="principles" />}
+            />
+            <Route path="/recap" element={<InfoPage section="recap" />} />
+            <Route path="/game" element={<InfoPage section="game" />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
