@@ -2,18 +2,14 @@ import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <aside
-      style={{
-        width: "240px",
-        padding: "1.5rem",
-        background: "#fffdf8",
-        borderRight: "1px solid #e5d9c7",
-        minHeight: "100vh",
-      }}
-    >
-      <h2 style={{ marginTop: 0 }}>HCM202</h2>
+    <aside className="sidebar">
+      <div className="sidebar-brand">
+        <span className="sidebar-eyebrow">HCM202</span>
+        <h2>Tư tưởng Hồ Chí Minh</h2>
+        <p>Đoàn kết quốc tế</p>
+      </div>
 
-      <nav style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+      <nav className="sidebar-nav">
         <NavLink to="/" className="nav-item">
           Tổng quan
         </NavLink>
@@ -31,7 +27,7 @@ export default function Sidebar() {
         </NavLink>
 
         <NavLink to="/game" className="nav-item">
-          Trò chơi
+          Mini game
         </NavLink>
       </nav>
     </aside>

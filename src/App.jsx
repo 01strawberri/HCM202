@@ -1,14 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import InfoPage from "./components/pages/InfoPage";
+import "./App.css";
 
 export default function App() {
   return (
     <Router>
-      <div style={{ display: "flex" }}>
+      <div className="app-shell">
         <Sidebar />
 
-        <main style={{ flex: 1, padding: "2rem" }}>
+        <main className="app-main">
           <Routes>
             <Route path="/" element={<InfoPage section="overview" />} />
             <Route path="/forces" element={<InfoPage section="forces" />} />
