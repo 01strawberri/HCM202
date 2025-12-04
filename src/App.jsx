@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import InfoPage from "./components/pages/InfoPage";
+import GamePage from "./components/pages/GamePage";
 import "./App.css";
 
 export default function App() {
@@ -11,14 +12,8 @@ export default function App() {
 
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<InfoPage section="overview" />} />
-            <Route path="/forces" element={<InfoPage section="forces" />} />
-            <Route
-              path="/principles"
-              element={<InfoPage section="principles" />}
-            />
-            <Route path="/recap" element={<InfoPage section="recap" />} />
-            <Route path="/game" element={<InfoPage section="game" />} />
+            <Route path="/" element={<InfoPage />} />
+            <Route path="/game" element={<GamePage />} />
           </Routes>
         </main>
       </div>

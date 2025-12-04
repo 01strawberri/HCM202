@@ -1,6 +1,29 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToSection = (id) => {
+    // Nếu đang ở trang game, điều hướng về trang chính trước
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Đợi DOM render xong rồi mới scroll
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        el && el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 0);
+    } else {
+      const el = document.getElementById(id);
+      el && el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleGameClick = (e) => {
+    e.preventDefault();
+    navigate("/game");
+  };
+
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
@@ -10,25 +33,41 @@ export default function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        <NavLink to="/" className="nav-item">
+        <button
+          type="button"
+          className="nav-item"
+          onClick={() => scrollToSection("overview")}
+        >
           Tổng quan
-        </NavLink>
+        </button>
 
-        <NavLink to="/forces" className="nav-item">
+        <button
+          type="button"
+          className="nav-item"
+          onClick={() => scrollToSection("forces")}
+        >
           Lực lượng
-        </NavLink>
+        </button>
 
-        <NavLink to="/principles" className="nav-item">
+        <button
+          type="button"
+          className="nav-item"
+          onClick={() => scrollToSection("principles")}
+        >
           Nguyên tắc
-        </NavLink>
+        </button>
 
-        <NavLink to="/recap" className="nav-item">
+        <button
+          type="button"
+          className="nav-item"
+          onClick={() => scrollToSection("recap")}
+        >
           Recap
-        </NavLink>
+        </button>
 
-        <NavLink to="/game" className="nav-item">
+        <button type="button" className="nav-item" onClick={handleGameClick}>
           Mini game
-        </NavLink>
+        </button>
       </nav>
     </aside>
   );
