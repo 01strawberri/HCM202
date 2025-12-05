@@ -149,7 +149,7 @@ export default function GamePage() {
       title: "Câu hỏi 9",
       hint: "Gió cuộn lời dân tộc vào vòng hòa bình",
       suggestion:
-        "Gợi ý: Gió cuộn thoe hình xoắn ốc từ ngoài vào trong, bắt đầu từ chữ cái bên ngoài cùng để giải mã.",
+        "Gợi ý: Gió cuộn theo hình xoắn ốc từ ngoài vào trong, bắt đầu từ chữ cái bên ngoài cùng để giải mã.",
 
       keyword: "BÌNH ĐẲNG TỰ NGUYỆN",
       explanation: (
@@ -242,9 +242,7 @@ export default function GamePage() {
       hint: (
         <>
           Trong tư tưởng Hồ Chí Minh, sức mạnh đoàn kết bền vững không đến từ
-          những lời đầu tiên dễ nói, mà nằm ở những giá trị sâu thẳm ở gần cuối;
-          chính những điều ấy mới tạo nên một tâm hồn chân thành và một thế giới
-          trong sáng.
+          những lời đầu tiên dễ nói, mà nằm ở những giá trị sâu thẳm ở gần cuối.
         </>
       ),
       suggestion:
@@ -366,7 +364,7 @@ export default function GamePage() {
           lối thẳng.”
         </>
       ),
-      suggestion: "Gợi ý: Không nhìn theo lối thẳng: Không nhìn xuôi",
+      suggestion: "Gợi ý: Không nhìn theo lối thẳng: Không nhìn xuôi dòng",
       keyword: "BẠN BÈ QUỐC TẾ",
       explanation: (
         <>
