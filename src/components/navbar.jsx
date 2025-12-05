@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,50 +25,31 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar-brand">
-        <span className="sidebar-eyebrow">HCM202</span>
-        <h2>Tư tưởng Hồ Chí Minh</h2>
-        <p>Đoàn kết quốc tế</p>
+    <header className="navbar">
+      <div className="navbar-brand">
+        <span className="navbar-eyebrow">HCM202</span>
+
+        <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+          <h2 style={{ margin: 0 }}>Tư tưởng Hồ Chí Minh -</h2>
+          <p style={{ margin: 0 }}>Đại đoàn kết toàn dân tộc và đoàn kết quốc tế</p>
+        </div>
       </div>
 
-      <nav className="sidebar-nav">
+
+      <nav className="navbar-nav">
         <button
           type="button"
-          className="nav-item"
+          className="nav-link"
           onClick={() => scrollToSection("overview")}
         >
           Tổng quan nội dung
         </button>
 
-        {/* <button
-          type="button"
-          className="nav-item"
-          onClick={() => scrollToSection("forces")}
-        >
-          Lực lượng
-        </button>
-
-        <button
-          type="button"
-          className="nav-item"
-          onClick={() => scrollToSection("principles")}
-        >
-          Nguyên tắc
-        </button>
-
-        <button
-          type="button"
-          className="nav-item"
-          onClick={() => scrollToSection("recap")}
-        >
-          Recap
-        </button> */}
-
-        <button type="button" className="nav-item" onClick={handleGameClick}>
+        <button type="button" className="nav-link" onClick={handleGameClick}>
           Mini game
         </button>
       </nav>
-    </aside>
+    </header>
   );
 }
+

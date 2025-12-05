@@ -1,340 +1,320 @@
+import { useState, useRef, useEffect } from 'react';
+import './InfoPage.css';
+
 export default function InfoPage() {
-  return (
-    <div>
+  const [showDetail, setShowDetail] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef(null);
+  const listRef = useRef(null);
+  const isTransitioningRef = useRef(false);
 
-      {/* Philosophy Section - Tổng quan đến Recap */}
-      <section className="philosophy-section" id="overview">
-        {/* Top Historical Ornament */}
-        <div className="historical-ornament top-ornament">
-          <div className="ornament-line"></div>
-          <div className="ornament-center">❦</div>
-          <div className="ornament-line"></div>
-        </div>
+  const items = [
+    {
+      id: 5,
+      title: 'Ý nghĩa và giá trị',
+      topic: 'Vận dụng trong thực tiễn',
+      description: 'Tư tưởng đoàn kết quốc tế của Hồ Chí Minh đã góp phần quan trọng vào thắng lợi của cách mạng Việt Nam. Chính vì đã biết kết hợp phong trào cách mạng nước ta với phong trào cách mạng của giai cấp công nhân và của các dân tộc bị áp bức, mà Đảng đã vượt qua được mọi khó khăn.',
+      image: '/images/ynghia.jpg',
+      detail: {
+        title: 'Ý nghĩa và giá trị',
+        content: (
+          <>
+            <h4>
+              <b>Thắng lợi của tư tưởng đoàn kết quốc tế:</b>
+            </h4>
+            <p>Chính vì đã biết kết hợp phong trào cách mạng nước ta với phong trào cách mạng của giai cấp công nhân và của các dân tộc bị áp bức, mà Đảng đã vượt qua được mọi khó khăn, đưa giai cấp công nhân và nhân dân ta đến những thắng lợi vẻ vang.</p>
 
-        <div className="philosophy-container">
-          {/* Section Header */}
-          <div className="section-header">
-            {/* Historical Portrait */}
-            <div className="historical-portrait">
-              <div className="portrait-frame">
-                <img 
-                  src="https://i.postimg.cc/dQkKyVDZ/tu-tuong-ho-chi-minh-ve-van-de-dan-toc-may-van-de-ban-luan18052015100122.gif" 
-                  alt="Tư tưởng Hồ Chí Minh về Đoàn kết quốc tế"
-                  className="portrait-image"
-                />
-                <div className="portrait-overlay"></div>
-              </div>
-            </div>
+            <h4>
+              <b>Hình thành mặt trận nhân dân thế giới:</b>
+            </h4>
+            <p>Đã hình thành một mặt trận nhân dân thế giới, có cả nhân dân Pháp và nhân dân Mỹ, đoàn kết với Việt Nam chống đế quốc xâm lược, góp phần kết thúc thắng lợi hai cuộc kháng chiến chống thực dân Pháp và đế quốc Mỹ.</p>
 
-            <h1 className="section-title">
-              <span className="title-ornament">❦</span>
-              Tư tưởng Hồ Chí Minh về Đoàn kết quốc tế
-              <span className="title-ornament">❦</span>
-            </h1>
-            <p className="section-subtitle">
-              Cô đọng nhất về lực lượng và nguyên tắc đoàn kết quốc tế. Tinh thần "bốn phương vô sản đều là anh em" được Hồ Chí Minh cụ thể hóa qua các liên minh chiến lược và những nguyên tắc vừa kiên định mục tiêu, vừa đề cao độc lập tự chủ.
+            <h4>
+              <b>Giá trị lịch sử:</b>
+            </h4>
+            <p>Tư tưởng đoàn kết vì thắng lợi của cách mạng Việt Nam đã định hướng cho việc hình thành bốn tầng mặt trận. Đây thực sự là sự phát triển rực rỡ nhất và thắng lợi to lớn nhất của tư tưởng Hồ Chí Minh về đại đoàn kết.</p>
+
+            <h4>
+              <b>Ý nghĩa hiện đại:</b>
+            </h4>
+            <p>Tư tưởng này vẫn còn nguyên giá trị trong bối cảnh hội nhập quốc tế hiện nay, giúp Việt Nam vừa giữ được độc lập tự chủ, vừa mở rộng hợp tác quốc tế. Đặt lợi ích dân tộc trong mạng lưới lợi ích chung nhân loại, tự chủ nội lực nhưng mở cửa hợp tác để nhân đôi sức mạnh.</p>
+          </>
+        ),
+        specifications: [
+          { label: 'Thắng lợi', value: 'Hai cuộc kháng chiến' },
+          { label: 'Mặt trận', value: 'Nhân dân thế giới' },
+          { label: 'Giá trị', value: 'Vẫn còn nguyên' },
+          { label: 'Ý nghĩa', value: 'Hội nhập quốc tế' }
+        ]
+      }
+    },
+    {
+      id: 1,
+      title: 'Tổng quan về Đoàn kết quốc tế',
+      topic: 'Tư tưởng Hồ Chí Minh',
+      description: 'Tư tưởng Hồ Chí Minh về đoàn kết quốc tế là một trong những nội dung cốt lõi của chủ nghĩa Mác - Lênin được vận dụng sáng tạo vào thực tiễn cách mạng Việt Nam. Đoàn kết quốc tế không chỉ là yêu cầu khách quan của cách mạng, mà còn là nguyên tắc chiến lược quan trọng.',
+      image: '/images/Homepage.gif',
+      detail: {
+        title: 'Tổng quan về Đoàn kết quốc tế',
+        content: (
+          <>
+            <h4>
+              <b>02 Nguyên tắc cốt lõi:</b>
+            </h4>
+            <ul>
+              <li>Thống nhất mục tiêu và lợi ích - Có lý, có tình</li>
+              <li>Tự lực là gốc, ngoại lực là trợ lực - Độc lập, tự chủ</li>
+            </ul>
+            <h4>
+              <b>03 Khối lực lượng cần quy tụ:</b>
+            </h4>
+            <ul>
+              <li>Phong trào cộng sản & công nhân quốc tế</li>
+              <li>Phong trào giải phóng dân tộc</li>
+              <li>Lực lượng yêu chuộng hòa bình, dân chủ</li>
+            </ul>
+            <h4>
+              <b>04 Tầng mặt trận đoàn kết:</b> Việt Nam ↔ Đông Dương ↔ Á - Phi ↔ Thế giới
+            </h4>
+
+          </>
+        ),
+        specifications: [
+          { label: 'Lực lượng', value: '03 khối chính' },
+          { label: 'Mặt trận', value: '04 tầng' },
+          { label: 'Nguyên tắc', value: '02 cốt lõi' },
+          { label: 'Mục tiêu', value: 'Đại đoàn kết dân tộc' }
+        ]
+      }
+    },
+    {
+      id: 3,
+      title: 'Lực lượng và hình thức tổ chức đoàn kết quốc tế',
+      topic: 'Phong trào cách mạng thế giới & Mặt trận đoàn kết',
+      description:
+        'Lực lượng đoàn kết quốc tế gồm phong trào cộng sản, phong trào giải phóng dân tộc và lực lượng tiến bộ thế giới; tổ chức thành nhiều tầng mặt trận.',
+      image: '/images/lucluong.jpg',
+      detail: {
+        title: 'Lực lượng đoàn kết quốc tế và hình thức tổ chức',
+        content: (
+          <>
+
+            <h3><b>a. Các lực lượng cần đoàn kết</b></h3>
+            <p>
+              <b>1. Phong trào cộng sản và công nhân quốc tế</b><br />
+              Đoàn kết giữa các Đảng và giai cấp công nhân là nền tảng để chống chủ nghĩa đế quốc,
+              tạo hậu thuẫn quốc tế cho cách mạng Việt Nam.
             </p>
 
-            {/* Historical Timeline */}
-            <div className="historical-timeline">
-              <div className="timeline-item">
-                <div className="timeline-year">1890-1969</div>
-                <div className="timeline-name">Hồ Chí Minh</div>
-              </div>
-              <div className="timeline-connector"></div>
-              <div className="timeline-item">
-                <div className="timeline-year">Đoàn kết quốc tế</div>
-                <div className="timeline-name">Tư tưởng cốt lõi</div>
-              </div>
-            </div>
-          </div>
+            <p>
+              <b>2. Phong trào đấu tranh giải phóng dân tộc</b><br />
+              Gắn bó giữa các dân tộc thuộc địa giúp tăng sức mạnh chống thực dân,
+              cùng hỗ trợ nhau giành độc lập.
+            </p>
 
-          {/* Tổng quan Block */}
-          <div className="philosophy-block">
-            <div className="block-header">
-              <div className="header-left">
-                <div className="block-icon">🌍</div>
-                <h2>Tổng quan</h2>
-              </div>
-              <div className="header-decoration">
-                <div className="decoration-scroll">📜</div>
-              </div>
-            </div>
+            <p>
+              <b>3. Các lực lượng tiến bộ, yêu chuộng hòa bình</b><br />
+              Trí thức, phong trào phản chiến, lực lượng dân chủ ủng hộ Việt Nam vì mục tiêu hòa bình,
+              công lý và quyền tự quyết của các dân tộc.
+            </p>
 
-            <div className="content-grid">
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>03 Khối lực lượng cần quy tụ</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <p>Ba lực lượng chủ yếu trong đoàn kết quốc tế theo tư tưởng Hồ Chí Minh:</p>
-                  <ul>
-                    <li>Phong trào cộng sản & công nhân quốc tế</li>
-                    <li>Phong trào giải phóng dân tộc</li>
-                    <li>Lực lượng yêu chuộng hòa bình, dân chủ</li>
-                  </ul>
-                </div>
-              </div>
+            <h3><b>b. Hình thức tổ chức</b></h3>
+            <p>Hình thành 4 tầng mặt trận:</p>
+            <ul>
+              <li>Đại đoàn kết dân tộc.</li>
+              <li>Việt Nam – Lào – Campuchia.</li>
+              <li>Mặt trận nhân dân Á – Phi.</li>
+              <li>Mặt trận nhân dân thế giới ủng hộ Việt Nam.</li>
+            </ul>
+          </>
+        ),
+        specifications: [
+          { label: 'Lực lượng 1', value: 'Phong trào cộng sản & công nhân quốc tế' },
+          { label: 'Lực lượng 2', value: 'Phong trào giải phóng dân tộc' },
+          { label: 'Lực lượng 3', value: 'Lực lượng tiến bộ yêu chuộng hòa bình' },
+          { label: 'Hình thức tổ chức', value: 'Bốn tầng mặt trận quốc tế' }
+        ]
+      }
+    },
+    
+    {
+      id: 4,
+      title: 'Nguyên tắc đoàn kết quốc tế',
+      topic: 'Có lý, có tình & Độc lập, tự chủ',
+      description: 'Hai nguyên tắc cốt lõi: Đoàn kết trên cơ sở thống nhất mục tiêu và lợi ích (có lý, có tình) và Đoàn kết trên cơ sở độc lập, tự chủ (tự lực là gốc, ngoại lực là trợ lực).',
+      image: '/images/nguyentac.jpg',
+      detail: {
+        title: 'Nguyên tắc đoàn kết quốc tế',
+        content: (
+          <>
+            <h3><b>a. Đoàn kết trên cơ sở thống nhất mục tiêu và lợi ích; có lý, có tình</b></h3>
 
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>04 Tầng mặt trận đoàn kết</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <p>Lộ trình mở rộng mặt trận đoàn kết:</p>
-                  <div className="highlight-box">
-                    <p><strong>Việt Nam</strong> ↔ <strong>Đông Dương</strong> ↔ <strong>Á - Phi</strong> ↔ <strong>Thế giới</strong></p>
+            <p><b>1. Thống nhất mục tiêu chung</b></p>
+            <p>
+              Hồ Chí Minh đặt cách mạng Việt Nam trong bối cảnh cách mạng thế giới,
+              kết hợp lợi ích dân tộc với lợi ích chung của thời đại.
+            </p>
+
+            <p><b>2. Nền tảng Mác – Lênin</b></p>
+            <p>
+              Đoàn kết với phong trào cộng sản và công nhân quốc tế dựa trên chủ nghĩa
+              Mác – Lênin và tinh thần quốc tế vô sản, “có lý, có tình”.
+            </p>
+
+            <p><b>3. Tôn trọng độc lập, chủ quyền</b></p>
+            <p>
+              Việt Nam tôn trọng chủ quyền mọi dân tộc; thực hiện đường lối “làm bạn với
+              tất cả các nước dân chủ và không gây thù oán với ai” (1947).
+            </p>
+
+            <p><b>4. Giương cao ngọn cờ hòa bình</b></p>
+            <p>
+              Kiên trì đấu tranh vì hòa bình, phản đối chiến tranh xâm lược;
+              xây dựng “hòa bình trong độc lập, tự do”.
+            </p>
+
+            <h3><b>b. Đoàn kết trên cơ sở độc lập, tự chủ</b></h3>
+
+            <p><b>1. Tự lực cánh sinh</b></p>
+            <p>
+              Nội lực là quyết định; quốc tế ủng hộ chỉ phát huy khi ta mạnh.
+              “Muốn người ta giúp cho, trước hết mình phải tự giúp mình đã”.
+            </p>
+
+            <p><b>2. Đường lối độc lập và đúng đắn</b></p>
+            <p>
+              Tranh thủ được quốc tế khi có đường lối tự chủ:
+              “Độc lập nghĩa là tự điều khiển lấy mọi công việc của mình”.
+            </p>
+
+            <p><b>3. Thực lực là cái chiêng, ngoại giao là cái tiếng</b></p>
+            <p>
+              Có thực lực thì tiếng nói đối ngoại mới mạnh.
+              Các Đảng trong phong trào cộng sản dù lớn hay nhỏ đều bình đẳng và đoàn kết.
+            </p>
+          </>
+        ),
+        specifications: [
+          { label: 'Nguyên tắc 1', value: 'Có lý, có tình' },
+          { label: 'Nguyên tắc 2', value: 'Độc lập, tự chủ' },
+          { label: 'Nền tảng', value: 'Mác - Lênin' },
+          { label: 'Khẩu hiệu', value: 'Tự lực cánh sinh' }
+        ]
+      }
+    }
+    
+  ];
+
+  const handleNext = () => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+
+    if (carouselRef.current) {
+      carouselRef.current.classList.remove('prev');
+      carouselRef.current.classList.add('next');
+    }
+
+    setTimeout(() => {
+      if (listRef.current) {
+        const firstItem = listRef.current.firstElementChild;
+        if (firstItem) {
+          listRef.current.appendChild(firstItem);
+        }
+      }
+      if (carouselRef.current) {
+        carouselRef.current.classList.remove('next');
+      }
+      setCurrentIndex((prev) => (prev + 1) % items.length);
+      isTransitioningRef.current = false;
+    }, 500);
+  };
+
+  const handlePrev = () => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+
+    if (carouselRef.current) {
+      carouselRef.current.classList.remove('next');
+      carouselRef.current.classList.add('prev');
+    }
+
+    setTimeout(() => {
+      if (listRef.current) {
+        const lastItem = listRef.current.lastElementChild;
+        if (lastItem) {
+          listRef.current.prepend(lastItem);
+        }
+      }
+      if (carouselRef.current) {
+        carouselRef.current.classList.remove('prev');
+      }
+      setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+      isTransitioningRef.current = false;
+    }, 500);
+  };
+
+  const handleSeeMore = () => {
+    setShowDetail(true);
+    if (carouselRef.current) {
+      carouselRef.current.classList.add('showDetail');
+    }
+  };
+
+  const handleBack = () => {
+    setShowDetail(false);
+    if (carouselRef.current) {
+      carouselRef.current.classList.remove('showDetail');
+    }
+  };
+
+  const currentItem = items[currentIndex];
+
+  return (
+    <div className="info-page">
+      {/* ORNAMENT ĐẶT NGAY DƯỚI NAVBAR */}
+      <div className="historical-ornament top-ornament">
+        <div className="ornament-line"></div>
+        <div className="ornament-center">✦</div>
+        <div className="ornament-line"></div>
+      </div>
+      <div className="carousel" ref={carouselRef}>
+        <div className="list" ref={listRef}>
+          {items.map((item, index) => (
+            <div key={item.id} className="item">
+              <img src={item.image} alt={item.title} />
+              <div className="introduce">
+                <div className="title">{item.title}</div>
+                <div className="topic">{item.topic}</div>
+                <div className="des">{item.description}</div>
+                <button className="seeMore" onClick={handleSeeMore}>
+                  XEM THÊM →
+                </button>
+              </div>
+              <div className="detail">
+                <div className="title">{item.detail.title}</div>
+                <div className="des">{item.detail.content}</div>
+                {item.detail.specifications && (
+                  <div className="specifications">
+                    {item.detail.specifications.map((spec, idx) => (
+                      <div key={idx}>
+                        <p>{spec.label}</p>
+                        <p>{spec.value}</p>
+                      </div>
+                    ))}
                   </div>
-                  <p>Mở rộng từ trong nước ra khu vực và toàn cầu.</p>
-                </div>
-              </div>
-
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>02 Nguyên tắc cốt lõi</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <p><strong>Thống nhất mục tiêu và lợi ích</strong> - Có lý, có tình</p>
-                  <p><strong>Tự lực là gốc, ngoại lực là trợ lực</strong> - Độc lập, tự chủ</p>
-                  <blockquote>
-                    "Tự lực cánh sinh, dựa vào sức mình là chính"
-                  </blockquote>
-                </div>
+                )}
               </div>
             </div>
-          </div>
-
-          {/* Lực lượng & hình thức tổ chức Block */}
-          <div className="philosophy-block" id="forces">
-            <div className="block-header">
-              <div className="header-left">
-                <div className="block-icon">⚡</div>
-                <h2>Lực lượng & hình thức tổ chức</h2>
-              </div>
-              <div className="header-decoration">
-                <div className="decoration-hammer">⚒️</div>
-                <div className="decoration-star">⭐</div>
-              </div>
-            </div>
-
-            <div className="content-grid">
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>Phong trào cộng sản & công nhân quốc tế</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <p>Đoàn kết giai cấp công nhân toàn thế giới bảo đảm thắng lợi cho chủ nghĩa cộng sản.</p>
-                  <ul>
-                    <li>Chống lại chủ nghĩa tư bản – lực lượng phản động quốc tế</li>
-                    <li>Cùng nhau theo tinh thần "bốn phương vô sản đều là anh em"</li>
-                    <li>Liên kết giữa các đảng cộng sản xuất phát từ vai trò tiên phong của công nhân</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>Phong trào giải phóng dân tộc</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <p>Sớm cảnh báo mưu đồ chia rẽ của đế quốc và yêu cầu Quốc tế Cộng sản kết nối các dân tộc thuộc địa.</p>
-                  <ul>
-                    <li>Chủ trương hình thành "liên minh phương Đông" – một cánh của cách mạng vô sản</li>
-                    <li>Tăng cường tiếp xúc giữa cách mạng thuộc địa và vô sản chính quốc</li>
-                    <li>Chuẩn bị hợp tác thực chất</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>Lực lượng yêu chuộng hòa bình, dân chủ</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <p>Tranh thủ nhân dân các nước đang xâm lược Việt Nam thông qua phong trào chống chiến tranh.</p>
-                  <ul>
-                    <li>Kết hợp mục tiêu độc lập dân tộc với hòa bình, công lý, bình đẳng</li>
-                    <li>Chạm tới lương tri tiến bộ</li>
-                    <li>Sự đồng tình của trí thức, quần chúng quốc tế giúp Đảng vượt qua khó khăn</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Hình thức tổ chức */}
-            <div className="focus-panel" style={{ marginTop: '30px' }}>
-              <div>
-                <h3>Hình thức tổ chức</h3>
-                <p>Các sáng kiến tiêu biểu thể hiện tư duy chiến lược của Hồ Chí Minh:</p>
-                <ul>
-                  <li><strong>1924:</strong> Đề xuất "Mặt trận thống nhất của nhân dân chính quốc và thuộc địa" chống đế quốc</li>
-                  <li><strong>1941:</strong> Thành lập Việt Minh, hỗ trợ Lào và Campuchia xây dựng mặt trận yêu nước</li>
-                  <li><strong>Kháng chiến:</strong> Dựng Mặt trận nhân dân ba nước Đông Dương; mở rộng sang Á - Phi và mặt trận nhân dân thế giới</li>
-                  <li>Duy trì liên kết mật thiết với Trung Quốc, các dân tộc Á - Phi và lực lượng đồng minh chống phát xít</li>
-                </ul>
-              </div>
-              <div className="timeline">
-                <h4>Dòng thời gian tóm gọn</h4>
-                <ul>
-                  <li><strong>1924</strong> · Kiến nghị mặt trận thống nhất chính quốc - thuộc địa</li>
-                  <li><strong>1941</strong> · Việt Minh ra đời, khơi dậy sức mạnh tự quyết</li>
-                  <li><strong>Kháng chiến</strong> · Hình thành mặt trận nhân dân Đông Dương, Á - Phi</li>
-                  <li><strong>Kháng chiến chống Mỹ</strong> · Mặt trận nhân dân thế giới đoàn kết với Việt Nam</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Nguyên tắc đoàn kết quốc tế Block */}
-          <div className="philosophy-block" id="principles">
-            <div className="block-header">
-              <div className="header-left">
-                <div className="block-icon">⚖️</div>
-                <h2>Nguyên tắc đoàn kết quốc tế</h2>
-              </div>
-              <div className="header-decoration">
-                <div className="decoration-scroll">📜</div>
-              </div>
-            </div>
-
-            <div className="dual-column">
-              <div className="column">
-                <div className="column-header">
-                  <h3>a. Có lý · có tình</h3>
-                  <span className="role-badge">Thống nhất mục tiêu và lợi ích</span>
-                </div>
-                <div className="role-content">
-                  <div className="role-item">
-                    <div className="role-number">1</div>
-                    <div className="role-text">
-                      <h4>Đặt cách mạng Việt Nam trong bối cảnh chung</h4>
-                      <p>Gắn lợi ích dân tộc với trào lưu cách mạng thế giới, kiên định ngọn cờ độc lập dân tộc gắn với chủ nghĩa xã hội.</p>
-                    </div>
-                  </div>
-                  <div className="role-item">
-                    <div className="role-number">2</div>
-                    <div className="role-text">
-                      <h4>Đoàn kết trên nền tảng chủ nghĩa Mác - Lênin</h4>
-                      <p>Tôn trọng độc lập, chủ quyền, toàn vẹn lãnh thổ của mọi quốc gia; chủ trương "làm bạn với tất cả các nước dân chủ" (1947).</p>
-                    </div>
-                  </div>
-                  <div className="role-item">
-                    <div className="role-number">3</div>
-                    <div className="role-text">
-                      <h4>Giương cao ngọn cờ hòa bình</h4>
-                      <p>Đấu tranh chống chiến tranh xâm lược vì một nền hòa bình chân chính đặt trên công bằng và lý tưởng dân chủ.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="column">
-                <div className="column-header">
-                  <h3>b. Độc lập · tự chủ</h3>
-                  <span className="role-badge">Tự lực là gốc, ngoại lực là trợ lực</span>
-                </div>
-                <div className="role-content">
-                  <div className="role-item">
-                    <div className="role-number">1</div>
-                    <div className="role-text">
-                      <h4>Tự lực cánh sinh</h4>
-                      <p>Đoàn kết quốc tế nhằm gia tăng nội lực, nhưng nội lực mới là yếu tố quyết định. "Tự lực cánh sinh, dựa vào sức mình là chính".</p>
-                    </div>
-                  </div>
-                  <div className="role-item">
-                    <div className="role-number">2</div>
-                    <div className="role-text">
-                      <h4>Tranh thủ viện trợ khi đã có thực lực</h4>
-                      <p>"Muốn người ta giúp cho, thì trước mình phải tự giúp lấy mình" – chỉ tranh thủ viện trợ khi đã có thực lực.</p>
-                    </div>
-                  </div>
-                  <div className="role-item">
-                    <div className="role-number">3</div>
-                    <div className="role-text">
-                      <h4>Thực lực là cái chiêng, ngoại giao là cái tiếng</h4>
-                      <p>Trong ngoại giao phải có đường lối độc lập, tự chủ, đúng đắn. Các Đảng dù lớn hay nhỏ đều bình đẳng, đoàn kết giúp đỡ lẫn nhau.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Recap nhanh Block */}
-          <div className="philosophy-block" id="recap">
-            <div className="block-header">
-              <div className="header-left">
-                <div className="block-icon">📚</div>
-                <h2>Recap nhanh</h2>
-              </div>
-              <div className="header-decoration">
-                <div className="decoration-star">⭐</div>
-              </div>
-            </div>
-
-            <div className="content-grid">
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>Ví dụ tiêu biểu</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <ul>
-                    <li>Hội nghị quốc tế ủng hộ Việt Nam tại Stockholm (1967)</li>
-                    <li>Trí thức Pháp và phong trào phản chiến Mỹ đứng về phía Việt Nam</li>
-                    <li>Liên minh Á - Phi đoàn kết với Việt Nam chống đế quốc xâm lược</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>Mindset áp dụng</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <ul>
-                    <li>Đặt lợi ích dân tộc trong mạng lưới lợi ích chung nhân loại</li>
-                    <li>Tự chủ nội lực, mở cửa hợp tác để nhân đôi sức mạnh</li>
-                    <li>Độc lập nhưng không tách rời trách nhiệm quốc tế</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="content-card">
-                <div className="card-header">
-                  <h3>Checklist ghi nhớ</h3>
-                  <div className="card-accent"></div>
-                </div>
-                <div className="card-content">
-                  <ul>
-                    <li>Xác định đúng đồng minh chiến lược</li>
-                    <li>Giữ nguyên tắc nhưng linh hoạt về hình thức mặt trận</li>
-                    <li>Kết hợp hòa bình - công lý - độc lập trong mọi thông điệp</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-
-        {/* Bottom Historical Ornament */}
-        <div className="historical-ornament bottom-ornament">
-          <div className="ornament-pattern">
-            <div className="pattern-element">❦</div>
-            <div className="pattern-element">⚡</div>
-            <div className="pattern-element">❦</div>
-            <div className="pattern-element">⚡</div>
-            <div className="pattern-element">❦</div>
-          </div>
+        <div className="arrows">
+          <button id="prev" onClick={handlePrev}>&lt;</button>
+          <button id="next" onClick={handleNext}>&gt;</button>
+          <button id="back" onClick={handleBack} style={{ opacity: showDetail ? 1 : 0 }}>
+            XEM TẤT CẢ →
+          </button>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
